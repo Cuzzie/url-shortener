@@ -1,5 +1,5 @@
 import { Module } from '@nestjs/common'
-import { ConfigModule } from '@nestjs/config'
+import { ConfigModule, ConfigService } from '@nestjs/config'
 import { TypeOrmModule } from '@nestjs/typeorm'
 import { AppController } from './app.controller'
 import { AppService } from './app.service'
@@ -11,7 +11,9 @@ import { UrlsModule } from './urls/urls.module'
     TypeOrmModule.forRootAsync({
       useClass: TypeOrmConfigService,
     }),
-    ConfigModule.forRoot(),
+    ConfigModule.forRoot({
+      isGlobal: true
+    }),
     UrlsModule,
   ],
   controllers: [AppController],

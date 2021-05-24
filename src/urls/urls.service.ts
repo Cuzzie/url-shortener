@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common'
 import { InjectRepository } from '@nestjs/typeorm'
 import { Repository } from 'typeorm'
+import { UrlsDto } from './urls.dto'
 import { Urls } from './urls.entity'
 
 @Injectable()
@@ -13,31 +14,31 @@ export class UrlsService {
     return this.urlsRepository.findOne({ ogUrl })
   }
 
-  async findByNewUrl(newUrl: string): Promise<Urls> {
-    return this.urlsRepository.findOne({ newUrl })
+  async findBySlug(slug: string): Promise<Urls> {
+    return this.urlsRepository.findOne({ slug })
   }
 
-  async create(ogUrl: string, newUrl?: string): Promise<Urls> {
-    let urlObj: Urls
-    let urlStr: string
+  async create(urlsDto: UrlsDto): Promise<Urls> {
+    let newSlug: string
+    const { ogUrl, slug } = urlsDto
     const og = await this.findByOgUrl(ogUrl)
     if (og) {
       return og
     }
-    if (newUrl) {
-      const newOne = await this.findByNewUrl(newUrl)
+    if (slug) {
+      const newOne = await this.findBySlug(slug)
       if (newOne) {
         throw Error(
           'The new URL you specified already exists! Please use another URL.',
         )
       }
-      urlStr = newUrl
+      newSlug = slug
     } else {
-      urlStr = Math.random().toString(36).substr(2, 6)
+      newSlug = Math.random().toString(36).substr(2, 6)
     }
-    urlObj = this.urlsRepository.create()
+    const urlObj: Urls = this.urlsRepository.create()
     urlObj.ogUrl = ogUrl
-    urlObj.newUrl = urlStr
+    urlObj.slug = newSlug
     this.urlsRepository.insert(urlObj)
     return urlObj
   }

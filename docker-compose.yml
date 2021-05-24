@@ -1,0 +1,25 @@
+version: "3"
+services:
+  urlshortenerapp:
+    container_name: urlshortenerapp
+    restart: unless-stopped
+    build: .
+    ports:
+      - 3000:3000
+    env_file:
+      - .env
+    depends_on:
+      - urlshortenerdb
+  urlshortenerdb:
+    container_name: urlshortenerdb
+    image: mysql/mysql-server:latest
+    ports:
+      - 3306:3306
+    volumes:
+      - ./db:/var/lib/mysql
+    env_file:
+      - .env
+    environment:
+      - MYSQL_ROOT_PASSWORD=${DB_PASSWORD}
+      - MYSQL_ROOT_HOST=${DB_REMOTE_HOST}
+      - MYSQL_DATABASE=${DB_NAME}

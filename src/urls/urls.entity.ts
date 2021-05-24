@@ -1,5 +1,6 @@
-import { Column, PrimaryGeneratedColumn } from 'typeorm'
+import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm'
 
+@Entity()
 export class Urls {
   @PrimaryGeneratedColumn('uuid')
   id: string
@@ -8,5 +9,5 @@ export class Urls {
   ogUrl: string
 
   @Column()
-  newUrl: string
+  slug: string
 }
