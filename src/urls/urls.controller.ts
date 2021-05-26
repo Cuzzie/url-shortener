@@ -7,15 +7,22 @@ import {
   Param,
   Post,
   Redirect,
+  Render,
+  Req,
   UsePipes,
   ValidationPipe,
 } from '@nestjs/common'
+import { Request } from 'express'
 import { UrlsDto } from './urls.dto'
 import { UrlsService } from './urls.service'
 
 @Controller('urls')
 export class UrlsController {
   constructor(private urlsService: UrlsService) {}
+
+  @Get()
+  @Render('index')
+  index() {}
 
   @Get(':slug')
   @Redirect()
@@ -36,8 +43,11 @@ export class UrlsController {
 
   @Post()
   @UsePipes(new ValidationPipe({ transform: true }))
-  async createUrl(@Body() urlsDto: UrlsDto) {
+  async createUrl(@Body() urlsDto: UrlsDto, @Req() request: Request) {
     const urls = await this.urlsService.create(urlsDto)
-    return { url: urls.slug }
+    const url = `${request.protocol}://${request.get('host')}/urls/${urls.slug}`
+    return {
+      url
+    }
   }
 }

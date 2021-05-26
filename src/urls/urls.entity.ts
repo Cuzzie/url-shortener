@@ -1,4 +1,4 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm'
+import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn } from 'typeorm'
 
 @Entity()
 export class Urls {
@@ -10,4 +10,7 @@ export class Urls {
 
   @Column()
   slug: string
+
+  @CreateDateColumn()
+  createdDt: Date
 }
