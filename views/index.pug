@@ -1,0 +1,23 @@
+doctype html
+head
+  meta(charset='utf-8')
+  title Cuzzie's URL Shortener
+  meta(name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0')
+  link(rel='stylesheet' href='/css/styles.css')
+
+h1.title Cuzzie's URL Shortener
+.content
+  .container
+    p Enter your link:
+    input#url(type='text' autofocus='')
+  .container
+    button.shorten(type='button') Shorten
+  #generated.container.hide
+    p Shortened URL:
+    .newUrlSection
+      p#newUrl
+      button.copy(type='button') Copy
+  #error.container.hide
+    p Invalid URL! Please enter a valid URL.
+
+script(src='/js/app.js')
