@@ -9,6 +9,7 @@ async function bootstrap() {
   app.useStaticAssets(join(__dirname, "..", "public"))
   app.setBaseViewsDir(join(__dirname, "..", "views"))
   app.setViewEngine("pug")
+  app.setGlobalPrefix("api")
 
   await app.listen(3000)
   console.log(`Application is running on: ${await app.getUrl()}`)

@@ -22,7 +22,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
       }
 
-      fetch('/urls', {
+      fetch('/api', {
         method: 'POST',
         body: JSON.stringify(urlObj),
         headers: {
