@@ -12,7 +12,6 @@ import {
   UsePipes,
   ValidationPipe,
 } from '@nestjs/common'
-import { Request } from 'express'
 import { UrlsDto } from './urls.dto'
 import { UrlsService } from './urls.service'
 
@@ -41,13 +40,13 @@ export class UrlsController {
     }
   }
 
-  @Post()
+  @Post('urls')
   @UsePipes(new ValidationPipe({ transform: true }))
-  async createUrl(@Body() urlsDto: UrlsDto, @Req() request: Request) {
+  async createUrl(@Body() urlsDto: UrlsDto) {
     const urls = await this.urlsService.create(urlsDto)
-    const url = `${request.protocol}://${request.get('host')}/urls/${urls.slug}`
+    const url = `https://url.cuzzie.net/${urls.slug}`
     return {
-      url
+      url,
     }
   }
 }
