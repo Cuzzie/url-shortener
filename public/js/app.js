@@ -49,6 +49,14 @@ document.addEventListener('DOMContentLoaded', () => {
         })
     })
 
+    urlInput.addEventListener('keyup', (e) => {
+      if (e.keyCode === 13) {
+        e.preventDefault()
+
+        shortenBtn.click()
+      }
+    })
+
     copyBtn.addEventListener('click', () => {
       copyToClipboard(newUrl.textContent)
       copyBtn.innerText = 'Copied!'

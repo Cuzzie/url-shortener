@@ -32,7 +32,7 @@ body {
 
 @media (max-width: 550px) {
   .title {
-    font-size: 2.7rem;
+    font-size: 3rem;
   }
 }
 
@@ -54,7 +54,7 @@ body {
 @media (max-width: 450px) {
   .content {
     max-width: 30rem;
-    font-size: 1.5rem;
+    font-size: 1.4rem;
   }
 }
 
@@ -100,7 +100,7 @@ button.shorten {
 @media (max-width: 550px) {
   button.shorten {
     width: 12rem;
-    padding: 0.7rem;
+    padding: 0.5rem;
   }
 }
 
@@ -144,7 +144,7 @@ button.copy:hover {
 
 @media (max-width: 550px) {
   button {
-    font-size: 1.5rem;
+    font-size: 1.3rem;
   }
 
   button.copy {
