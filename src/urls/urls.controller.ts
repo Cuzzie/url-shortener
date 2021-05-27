@@ -16,7 +16,7 @@ import { Request } from 'express'
 import { UrlsDto } from './urls.dto'
 import { UrlsService } from './urls.service'
 
-@Controller('urls')
+@Controller()
 export class UrlsController {
   constructor(private urlsService: UrlsService) {}
 
